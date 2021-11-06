@@ -1,0 +1,43 @@
+@import './variables';
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+button {
+  outline: none;
+  border: none;
+  background: transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1.1em;
+  font-weight: 500;
+  border: 2px solid transparent;
+  transition: all 0.4s ease;
+  &.filled {
+    background: $green;
+    color: $white;
+  }
+  &.outlined {
+    border: 2px solid $green;
+    color: $green;
+    &:hover {
+      background: $green;
+      color: $white;
+    }
+  }
+}
+section {
+  padding: 5em 0;
+  position: relative;
+}

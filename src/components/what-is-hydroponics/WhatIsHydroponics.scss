@@ -1,0 +1,44 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+.what-is-hydroponics {
+  .content {
+    h2 {
+      margin-bottom: 1em;
+    }
+    P {
+      color: $text-secondary;
+    }
+  }
+  .gallery {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    .image {
+      height: 130px;
+      width: 130px;
+      border: 6px solid $white;
+      @include background-fit;
+      &.active {
+        border: 6px solid $green;
+      }
+    }
+  }
+  .display-image {
+    min-height: 400px;
+    height: 100%;
+    width: 100%;
+    @include background-fit;
+  }
+}
+
+@media (max-width: $sm) {
+  .what-is-hydroponics {
+    .gallery {
+      .image {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+}

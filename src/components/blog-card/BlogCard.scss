@@ -1,0 +1,19 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+.blog-card {
+  height: 100%;
+  padding: 1em;
+  border: 1px solid #b4b4b4;
+  .image {
+    min-height: 180px;
+    width: 100%;
+    @include background-fit;
+    margin-bottom: 2em;
+  }
+  h4 {
+    margin-bottom: 1em;
+  }
+  p {
+    color: $text-secondary;
+  }
+}

@@ -1,0 +1,10 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+.shop-banner {
+  min-height: 40vh;
+  background-color: $green;
+  @include justify-center;
+  background-image: url('https://www.basf.com/global/press-photos/en/photos/2021/07/P259_UrbanKisaan-Hydroponic-Farm.jpg');
+  @include background-fit;
+  background-attachment: fixed;
+}

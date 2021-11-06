@@ -1,0 +1,16 @@
+@import '../../styles/variables';
+.navbar {
+  background: $white;
+  .navbar-brand {
+    img {
+      max-width: 80px;
+    }
+  }
+  .navbar-nav {
+    .nav-item {
+      .nav-link {
+        cursor: pointer;
+      }
+    }
+  }
+}
