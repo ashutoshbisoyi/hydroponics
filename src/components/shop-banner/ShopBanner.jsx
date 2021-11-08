@@ -1,9 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ShopBanner.scss';
 const ShopBanner = () => {
   return (
     <div className='shop-banner'>
-      <button className='filled'>Start Shopping</button>
+      <Link to='/shopping'>
+        <button className='filled'>Start Shopping</button>
+      </Link>
     </div>
   );
 };

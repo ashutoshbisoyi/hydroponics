@@ -6,3 +6,12 @@
 @import './mixins';
 @import './variables';
 @import './resets';
+
+.link {
+  color: #0056d2;
+}
+.justify-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

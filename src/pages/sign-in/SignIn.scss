@@ -1,0 +1,7 @@
+@import '../../styles/mixins';
+.sign-in {
+  .image {
+    min-height: 85vh;
+    @include background-fit;
+  }
+}

@@ -1,0 +1,36 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+.shopping-item {
+  background-color: $white;
+  padding: 1em;
+  border-radius: 16px;
+  box-shadow: 5px 5px 10px #e3e3e3, -5px -5px 10px #ffffff;
+  margin-bottom: 2em;
+  .image {
+    width: 100%;
+    padding-top: 56.25%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px 16px 0 0;
+    margin-bottom: 1em;
+  }
+  .title-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.6em;
+    h5 {
+      font-weight: 500;
+      font-size: 1.3em;
+      margin-bottom: 0;
+    }
+    span {
+      font-weight: 500;
+      color: $green;
+      font-size: 1.4em;
+    }
+  }
+  button {
+    width: 100%;
+  }
+}
