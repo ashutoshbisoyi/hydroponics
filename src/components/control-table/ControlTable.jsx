@@ -17,24 +17,55 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Chip, Slider } from '@mui/material';
 import { Line } from 'react-chartjs-2';
 const ControlTable = () => {
-  const createData = (name, currentValue, status, control, actions) => {
+  const [currentValue, setCurrentValue] = React.useState({
+    temperature: 70,
+    moisture: 85,
+    lightIntensity: 60,
+    waterTemperature: 70,
+    ph: 4.9,
+    ec: 2,
+    snprikleRelay: 1,
+  });
+  const handleChange = (event, name, newValue) => {
+    setCurrentValue({ ...currentValue, [name]: newValue });
+    console.log();
+  };
+  const optimise = (name, newValue) => {
+    setCurrentValue({ ...currentValue, [name]: newValue });
+  };
+  const createData = (name, value, status, control, actions) => {
     if (name === 'Temperature') {
       let status;
       let statusColor = 'success';
-      if (currentValue >= 65 && currentValue <= 80) {
+      if (currentValue.temperature >= 65 && currentValue.temperature <= 80) {
         status = 'Good';
         statusColor = 'success';
-      } else if (currentValue > 80) {
+      } else if (currentValue.temperature > 80) {
         status = 'High';
-      } else if (currentValue < 65) {
-        currentValue = 'Low';
+        statusColor = 'error';
+      } else if (currentValue.temperature < 65) {
+        status = 'Low';
+        statusColor = 'error';
       }
       return {
         name,
-        currentValue: `${currentValue}° F`,
+        currentValue: `${currentValue.temperature}° F`,
         status: <Chip label={status} color={statusColor} />,
-        control: <Slider aria-label='temperature' value={currentValue} />,
-        actions: <button className='filled'>Optimise</button>,
+        control: (
+          <Slider
+            aria-label='temperature'
+            value={currentValue.temperature}
+            onChange={(e, newValue) => handleChange(e, 'temperature', newValue)}
+          />
+        ),
+        actions: (
+          <button
+            className='filled'
+            onClick={() => optimise('temperature', 70)}
+          >
+            Optimise
+          </button>
+        ),
         description: (
           <p>
             To keep plants thriving, the nutrient solution and water solvent
@@ -69,22 +100,26 @@ const ControlTable = () => {
     } else if (name === 'Moisture') {
       let status;
       let statusColor = 'success';
-      if (currentValue > 60 && currentValue <= 70) {
+      if (currentValue.moisture > 60 && currentValue.moisture <= 70) {
         status = 'Good';
         statusColor = 'success';
-      } else if (currentValue > 70) {
+      } else if (currentValue.moisture > 70) {
         status = 'High';
         statusColor = 'error';
-      } else if (currentValue < 50) {
-        currentValue = 'Low';
+      } else if (currentValue.moisture < 50) {
+        status = 'Low';
         statusColor = 'error';
       }
       return {
         name,
-        currentValue: `${currentValue}%`,
+        currentValue: `${currentValue.moisture}%`,
         status: <Chip label={status} color={statusColor} />,
         control: '- -',
-        actions: <button className='filled'>Optimise</button>,
+        actions: (
+          <button className='filled' onClick={() => optimise('moisture', 65)}>
+            Optimise
+          </button>
+        ),
         description: (
           <p>
             you can start around 60-70% humidity and gradually reduce it to
@@ -114,20 +149,40 @@ const ControlTable = () => {
     } else if (name === 'Light Intensity') {
       let status;
       let statusColor = 'success';
-      if (currentValue > 40 && currentValue <= 60) {
+      if (
+        currentValue.lightIntensity > 40 &&
+        currentValue.lightIntensity <= 60
+      ) {
         status = 'Good';
         statusColor = 'success';
-      } else if (currentValue > 70) {
+      } else if (currentValue.lightIntensity >= 60) {
         status = 'High';
-      } else if (currentValue < 30) {
-        currentValue = 'Low';
+        statusColor = 'error';
+      } else if (currentValue.lightIntensity <= 30) {
+        status = 'Low';
+        statusColor = 'error';
       }
       return {
         name,
-        currentValue: `${currentValue}%`,
+        currentValue: `${currentValue.lightIntensity}%`,
         status: <Chip label={status} color={statusColor} />,
-        control: <Slider aria-label='temperature' value={currentValue} />,
-        actions: <button className='filled'>Optimise</button>,
+        control: (
+          <Slider
+            aria-label='temperature'
+            value={currentValue.lightIntensity}
+            onChange={(e, newValue) =>
+              handleChange(e, 'lightIntensity', newValue)
+            }
+          />
+        ),
+        actions: (
+          <button
+            className='filled'
+            onClick={() => optimise('lightIntensity', 50)}
+          >
+            Optimise
+          </button>
+        ),
         description: (
           <p>
             With artificial lighting in your hydroponic garden, the main goal is
@@ -158,20 +213,30 @@ const ControlTable = () => {
     } else if (name === 'Water Temperature') {
       let status;
       let statusColor = 'success';
-      if (currentValue > 65 && currentValue <= 80) {
+      if (
+        currentValue.waterTemperature > 65 &&
+        currentValue.waterTemperature <= 80
+      ) {
         status = 'Good';
         statusColor = 'success';
-      } else if (currentValue > 80) {
+      } else if (currentValue.waterTemperature > 80) {
         status = 'High';
-      } else if (currentValue < 65) {
-        currentValue = 'Low';
+      } else if (currentValue.waterTemperature < 65) {
+        currentValue.waterTemperature = 'Low';
       }
       return {
         name,
-        currentValue: `${currentValue}%`,
+        currentValue: `${currentValue.waterTemperature}%`,
         status: <Chip label={status} color={statusColor} />,
         control: '- -',
-        actions: <button className='filled'>Optimise</button>,
+        actions: (
+          <button
+            className='filled'
+            onClick={() => optimise('waterTemperature', 70)}
+          >
+            Optimise
+          </button>
+        ),
         description: (
           <p>
             To keep plants thriving, the nutrient solution and water solvent
@@ -201,22 +266,25 @@ const ControlTable = () => {
     } else if (name === 'PH') {
       let status = 'Good';
       let statusColor = 'success';
-      console.log(currentValue);
-      if (currentValue >= 5 && currentValue <= 6) {
+      if (currentValue.ph >= 5 && currentValue.ph <= 6) {
         status = 'Good';
         statusColor = 'success';
-      } else if (currentValue > 6) {
+      } else if (currentValue.ph > 6) {
         status = 'High';
-      } else if (currentValue < 5) {
+      } else if (currentValue.ph < 5) {
         status = 'Low';
         statusColor = 'error';
       }
       return {
         name,
-        currentValue: `${currentValue}`,
+        currentValue: `${currentValue.ph}`,
         status: <Chip label={status} color={statusColor} />,
         control: '- -',
-        actions: <button className='filled'>Optimise</button>,
+        actions: (
+          <button className='filled' onClick={() => optimise('ph', 5.5)}>
+            Optimise
+          </button>
+        ),
         description: (
           <p>
             pH is a measure of how acidic or basic the solution is at the time
@@ -250,22 +318,25 @@ const ControlTable = () => {
     } else if (name === 'EC') {
       let status = 'Good';
       let statusColor = 'success';
-      console.log(currentValue);
-      if (currentValue >= 1.5 && currentValue <= 2.5) {
+      if (currentValue.ec >= 1.5 && currentValue.ec <= 2.5) {
         status = 'Good';
         statusColor = 'success';
-      } else if (currentValue > 2.5) {
+      } else if (currentValue.ec > 2.5) {
         status = 'High';
-      } else if (currentValue < 1.5) {
+      } else if (currentValue.ec < 1.5) {
         status = 'Low';
         statusColor = 'error';
       }
       return {
         name,
-        currentValue: `${currentValue} dS/m`,
+        currentValue: `${currentValue.ec} dS/m`,
         status: <Chip label={status} color={statusColor} />,
         control: '- -',
-        actions: <button className='filled'>Optimise</button>,
+        actions: (
+          <button className='filled' onClick={() => optimise('ec', 2)}>
+            Optimise
+          </button>
+        ),
         description: (
           <p>
             For most hydroponic crops, the ideal range of EC for most crops is
@@ -296,10 +367,10 @@ const ControlTable = () => {
     } else if (name === 'Relay (Sprinkle)') {
       let status = 'OFF';
       let statusColor = 'error';
-      if (currentValue === 1) {
+      if (currentValue.sprinkleRelay === 1) {
         status = 'ON';
         statusColor = 'success';
-      } else if (currentValue === 0) {
+      } else if (currentValue.sprinkleRelay === 0) {
         status = 'OFF';
         statusColor = 'error';
       }
@@ -308,7 +379,14 @@ const ControlTable = () => {
         currentValue: `${currentValue}`,
         status: <Chip label={status} color={statusColor} />,
         control: '- -',
-        actions: <button className='filled'>Turn OFF</button>,
+        actions: (
+          <button
+            className='filled'
+            onClick={() => optimise('sprinkleRelay', 0)}
+          >
+            Turn OFF
+          </button>
+        ),
         description: (
           <p>
             The relay connected with the sprinklers that turn on the water

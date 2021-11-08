@@ -3,6 +3,7 @@ import './Features.scss';
 import quality from '../../assets/quality.png';
 import water from '../../assets/water.png';
 import space from '../../assets/space.png';
+import growth from '../../assets/growth.png';
 const Features = () => {
   const featuresData = [
     {
@@ -24,10 +25,10 @@ const Features = () => {
         'When it comes to fruits and vegetables, fresher is unmistakably better. Few people happen to live in an area where they can get fresh produce year-round due to climate and soil conditions.',
     },
     {
-      image: space,
-      heading: 'Less Space',
+      image: growth,
+      heading: 'Faster Growth',
       description:
-        'Hydroponics requires far less space than plants grown in soil. Depending on the system, when hydroponics are combined with vertical farming techniques, they can use up to 99 percent fewer lands than typical farming techniques. ',
+        'Most fruits and vegetables take several months to reach maturity using traditional methods. Plants must take their nutrients from the soil, which can be a slow process. Hydroponics process helps the plant grow faster. ',
     },
   ];
   return (
