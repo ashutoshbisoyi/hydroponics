@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './ControlTable.scss';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
