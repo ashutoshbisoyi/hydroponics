@@ -9,6 +9,10 @@ import theme from './utils/theme';
 import Shopping from './pages/shopping/Shopping';
 import Cart from './pages/cart/Cart';
 import Controls from './pages/controls/Controls';
+
+//firebase
+import { db } from './firebase';
+
 const App = () => {
   return (
     <ThemeProvider theme={theme}>

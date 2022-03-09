@@ -16,6 +16,11 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Chip, Slider } from '@mui/material';
 import { Line } from 'react-chartjs-2';
+
+//firebase
+import { ref, onValue } from 'firebase/database';
+import { db } from '../../firebase';
+
 const ControlTable = () => {
   const [currentValue, setCurrentValue] = React.useState({
     temperature: 70,
@@ -26,6 +31,21 @@ const ControlTable = () => {
     ec: 2,
     snprikleRelay: 1,
   });
+
+  React.useEffect(() => {
+    onValue(ref(db), (snapshot) => {
+      // setCurrentValue({...currentValue,moisture:0});
+      const data = snapshot.val();
+      if (data !== null) {
+        console.log('received data', data);
+        setCurrentValue({
+          ...currentValue,
+          moisture: data.moistureData.moisture,
+        });
+      }
+    });
+  }, []);
+
   const handleChange = (event, name, newValue) => {
     setCurrentValue({ ...currentValue, [name]: newValue });
     console.log();
@@ -100,7 +120,7 @@ const ControlTable = () => {
     } else if (name === 'Moisture') {
       let status;
       let statusColor = 'success';
-      if (currentValue.moisture > 60 && currentValue.moisture <= 70) {
+      if (currentValue.moisture >= 60 && currentValue.moisture <= 70) {
         status = 'Good';
         statusColor = 'success';
       } else if (currentValue.moisture > 70) {
@@ -437,7 +457,7 @@ const ControlTable = () => {
 
   function Row(props) {
     const { row } = props;
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
 
     return (
       <React.Fragment>
