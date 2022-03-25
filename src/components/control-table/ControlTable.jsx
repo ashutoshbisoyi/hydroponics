@@ -23,7 +23,7 @@ import { db } from '../../firebase';
 
 const ControlTable = () => {
   const [currentValue, setCurrentValue] = React.useState({
-    temperature: 70,
+    temperature: 30,
     moisture: 85,
     lightIntensity: 60,
     waterTemperature: 70,
@@ -40,7 +40,8 @@ const ControlTable = () => {
         console.log('received data', data);
         setCurrentValue({
           ...currentValue,
-          moisture: data.moistureData.moisture,
+          moisture: data.FirebaseIOT.humidity,
+          temperature: data.FirebaseIOT.temperature,
         });
       }
     });
@@ -69,7 +70,7 @@ const ControlTable = () => {
       }
       return {
         name,
-        currentValue: `${currentValue.temperature}° F`,
+        currentValue: `${currentValue.temperature}° C`,
         status: <Chip label={status} color={statusColor} />,
         control: (
           <Slider
